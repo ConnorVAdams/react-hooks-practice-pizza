@@ -12,10 +12,14 @@ function App() {
     .then(data => setPizzas(data))
   }, [])
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+  }
+
   return (
     <>
       <Header />
-      <PizzaForm />
+      <PizzaForm onSubmit={handleSubmit}/>
       <PizzaList pizzas={pizzas}/>
     </>
   );
