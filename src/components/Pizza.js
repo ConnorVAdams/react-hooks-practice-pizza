@@ -1,13 +1,18 @@
 import React from "react";
 
-function Pizza({ id, topping, size, vegetarian }) {
+function Pizza({ id, topping, size, vegetarian, onEdit }) {
+
+  const captureId = ({ target: { id } }) => {
+    onEdit(id)
+  }
+
   return (
-    <tr id={id}>
+    <tr >
       <td>{topping}</td>
       <td>{size}</td>
       <td>{vegetarian ? 'Yes' : 'No'}</td>
       <td>
-        <button type="button" className="btn btn-primary">
+        <button id={id} onClick={captureId} type="button" className="btn btn-primary">
           Edit Pizza
         </button>
       </td>

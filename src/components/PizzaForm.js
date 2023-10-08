@@ -1,37 +1,21 @@
 import { useState } from "react";
 
-function PizzaForm({ onSubmit }) {
-  const [formData, setFormData] = useState({
-    topping: '',
-    size: 'Small',
-    vegetarian: '',
-  })
+function PizzaForm({ handleSubmit, handleFormChange, formData }) {
 
-  const handleFormChange = ({ target: { name, value } }) => { 
-    if (name === 'topping') {
-      setFormData({
-        ...formData,
-        topping: value
-      })
-    } else if (name === 'size') {
-      setFormData({
-        ...formData,
-        size: value
-      })
-    } else {
-      setFormData({
-        ...formData,
-        vegetarian: value === 'Vegetarian' ? true : false
-      })
-    }
+  const onFormChange = (e) => { 
+    handleFormChange(e)
   }
   
+  const onSubmit = (e) => {
+    handleSubmit(e)
+  }
+
   return (
     <form onSubmit={onSubmit}>
       <div className="form-row">
         <div className="col-5">
           <input
-            onChange={handleFormChange}
+            onChange={onFormChange}
             className="form-control"
             type="text"
             name="topping"
@@ -40,7 +24,7 @@ function PizzaForm({ onSubmit }) {
           />
         </div>
         <div className="col">
-          <select onChange={handleFormChange} className="form-control" name="size" value={formData.size}>
+          <select onChange={onFormChange} className="form-control" name="size" value={formData.size}>
             <option value="Small">Small</option>
             <option value="Medium">Medium</option>
             <option value="Large">Large</option>
@@ -49,7 +33,7 @@ function PizzaForm({ onSubmit }) {
         <div className="col">
           <div className="form-check">
             <input
-              onChange={handleFormChange}
+              onChange={onFormChange}
               className="form-check-input"
               type="radio"
               name="vegetarian"
@@ -60,7 +44,7 @@ function PizzaForm({ onSubmit }) {
           </div>
           <div className="form-check">
             <input
-              onChange={handleFormChange}
+              onChange={onFormChange}
               className="form-check-input"
               type="radio"
               name="vegetarian"
