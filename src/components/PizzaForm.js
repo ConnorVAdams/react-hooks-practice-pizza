@@ -3,18 +3,26 @@ import { useState } from "react";
 function PizzaForm({ onSubmit }) {
   const [formData, setFormData] = useState({
     topping: '',
-    size: '',
+    size: 'Small',
     vegetarian: '',
   })
-  const [radioSelected, setRadioSelected] = useState(false)
 
-  const handleFormChange = (e) => { 
-    if (e.target.name === 'topping') {
-      console.log('text')
-    } else if (e.target.name === 'size') {
-      console.log('select')
+  const handleFormChange = ({ target: { name, value } }) => { 
+    if (name === 'topping') {
+      setFormData({
+        ...formData,
+        topping: value
+      })
+    } else if (name === 'size') {
+      setFormData({
+        ...formData,
+        size: value
+      })
     } else {
-      console.log('radio')
+      setFormData({
+        ...formData,
+        vegetarian: value === 'Vegetarian' ? true : false
+      })
     }
   }
   
